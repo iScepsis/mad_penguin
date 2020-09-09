@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Преобразуем обычную json строку в человекопонятную и форматированную
-# Dependensies: python, ascii2uni
+# Dependencies: python, ascii2uni
 
 # sudo ln -s ~/bash_scripts/readable_json /usr/bin/readable_json
 # alias rjson="bash readable_json"
