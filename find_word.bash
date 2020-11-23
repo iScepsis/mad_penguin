@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Поиск слов из фразы в строках. Возвращаем 1, если слова найдены в 1ой группе слов, 0 - если во второй, -1 - если не
+# Поиск слов из фразы в строках. Возвращаем 1, если слова найдены в 1ой группе слов, 2 - если во второй, 0 - если не
 # найдено соответствий ни в одной из групп
 # Вызов:
 #  $ bash ./find_word.bash 'искомое_слово_или_фраза' 'группа_слов_1' 'группа_слов_2'
@@ -23,15 +23,20 @@ function find_word() {
   return $result;
 }
 
-find_word "$1" "$2"
+#to lower case
+needle="${1,,}"
+haystack1="${2,,}"
+haystack2="${3,,}"
+
+find_word "$needle" "$haystack1"
 true_words=$?
-find_word "$1" "$3"
+find_word "$needle" "$haystack2"
 false_words=$?
 
 if [ "$true_words" == 0 ]; then
-  echo "1";
+  printf "1";
 elif [ "$false_words" == 0 ]; then
-  echo "0";
+  printf "2";
 else
-  echo "-1";
+  printf "0";
 fi;
