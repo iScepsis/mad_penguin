@@ -16,7 +16,7 @@ function find_word() {
   local needle=$(echo "$1" | tr " " "\n")
   for word in $needle
   do
-      if echo "$2" | grep -q "$word"; then
+      if echo "$2" | grep -wq "$word"; then
         result=0;
       fi;
   done
