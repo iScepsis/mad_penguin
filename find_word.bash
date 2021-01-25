@@ -12,14 +12,21 @@
 function find_word() {
   #Разбиваем слова
   local result=1;
-  # shellcheck disable=SC2155
-  local needle=$(echo "$1" | tr " " "\n")
-  for word in $needle
+
+  user_words=(`echo $1 | sed 's/ /\n/g'`)  #Слова среди которых ищем
+  search_words=(`echo $2 | sed 's/ /\n/g'`)  #Слова которые ищем
+  for uw in "${user_words[@]}"
   do
-      if echo "$2" | grep -wq "$word"; then
-        result=0;
-      fi;
+      #echo $uw
+      for sw in "${search_words[@]}"
+      do
+          #echo $sw
+          if echo "$uw" | grep -E -i -wq "$sw"; then
+            result=0;
+          fi;
+      done
   done
+
   return $result;
 }
 
